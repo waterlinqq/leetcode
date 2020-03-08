@@ -31,5 +31,10 @@
 var buildTree = function(inorder, postorder) {
   // inorder lmr
   // postorder lrm
-
+  if(inorder.length == 0 || postorder.length == 0) return null
+  const root = new TreeNode(postorder[postorder.length - 1])
+  const rootIndex = inorder.indexOf(root.val)
+  root.left = buildTree(inorder.slice(0, rootIndex), postorder.slice(0, rootIndex))
+  root.right = buildTree(inorder.slice(rootIndex + 1), postorder.slice(rootIndex , postorder.length -1) )
+  return root 
 };
