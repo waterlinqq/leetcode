@@ -43,3 +43,41 @@ var maxProfit = function(prices){
     return acc +  (price2 > price ? price2 - price : 0) 
   }, 0)
 }
+
+var maxProfit = function(prices){
+  if(prices.length == 0) return 0
+  const len = prices.length
+  const dp = Array(len).fill(Array(2))
+  dp[0][0] = 0
+  dp[0][1] = -prices[1]
+  for(let i=1; i<len; i++){
+    dp[i][0] = Math.max(dp[i-1][0], dp[i-1][1] + prices[i])
+    dp[i][1] = Math.max(dp[i-1][1], dp[i-1][0] - prices[i])
+  }
+  return dp[len -1][0]
+}
+
+var maxProfit = function(prices){
+  if(prices.length == 0) return 0 
+  const len = prices.length
+  const cash = Array(len)
+  const hold = Array(len)
+  cash[0] = 0
+  hold[0] = -prices[0]
+  for(let i = 1; i < len; i ++){
+    cash[i] = Math.max(cash[i-1], hold[i-1] + prices[i])
+    hold[i] = Math.max(hold[i-1], cash[i-1] - prices[i])
+  }
+  return cash[len - 1]
+}
+
+var maxProfit = function(prices){
+  if(prices.length == 0) return 0 
+  let cash = 0
+  let hold = -prices[0]
+  for(let i = 1; i < prices.length; i ++){
+    cash = Math.max(cash, hold + prices[i])
+    hold = Math.max(hold, cash - prices[i])
+  }
+  return cash
+}
