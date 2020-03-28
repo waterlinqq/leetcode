@@ -15,6 +15,15 @@
  * @return {number[]}
  */
 var twoSum = function(nums, target) {
+  const map = {};
+  for (const i in nums) {
+    const num = nums[i];
+    if (map[target - num]) return [i, map[target - num]];
+    else map[num] = i;
+  }
+};
+
+var twoSum = function(nums, target) {
   let i = 0,
     j = nums.length - 1;
   while (nums.length) {
